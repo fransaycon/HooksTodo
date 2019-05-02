@@ -1,0 +1,67 @@
+// VARIABLES
+$black: #A9A9A9;
+$blue: #0099CC;
+$red: #DB2929;
+$white: #000000;
+$primary-font: 'Nanum Gothic';
+$font-h1: 40px;
+$font-h2: 30px;
+$font-h3: 20px;
+
+%common-button{
+  border-radius: 10px;
+  width: 100px;
+  font-size: 25px;
+}
+
+%common-container{
+  display:flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  font-family: $primary-font;
+}
+
+h1 {
+  margin: 0;
+  font-size: $font-h1;
+}
+
+h2 {
+  margin: 0;
+  font-size: $font-h2;
+}
+
+h3 {
+  margin: 0;
+  font-size: $font-h3;
+}
+
+.DarkTheme{
+  &-container{
+    @extend %common-container;
+    background-color: $black;
+  }
+
+  &-button{
+    @extend %common-button;
+    background-color: $red;
+    color: white;
+  }
+}
+
+.LightTheme{
+  &-container{
+    @extend %common-container;
+    background-color: $white;
+  }
+
+  &-button{
+    @extend %common-button;
+    background-color: $blue;
+    color: $black;
+  }
+}
