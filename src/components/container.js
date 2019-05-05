@@ -9,6 +9,7 @@ class Container extends React.Component {
 		text: "",
 		items: [],
 		count: 0,
+		theme: themes.light,
 	}
 
 	addItem = e => {
@@ -24,6 +25,15 @@ class Container extends React.Component {
 		this.setState({text: e.target.value});
 	}
 
+	changeTheme = () =>{
+		if(this.state.theme === themes.light){
+			this.setState({theme: themes.dark});
+		}
+		else {
+			this.setState({theme: themes.light});
+		}
+	}
+
 	componentDidMount(){
 		document.title = `You have ${this.state.count} tasks!`;
 	}
@@ -34,10 +44,11 @@ class Container extends React.Component {
 
     render(){
     	return (
-	    	<ThemeContext.Provider value={themes.light}>
+	    	<ThemeContext.Provider value={this.state.theme}>
 	    		<View
 	    			{...this.state}
 	    			addItem={this.addItem}
+	    			changeTheme={this.changeTheme}
 	    			updateText={this.updateText}
 	    		/>
 	    	</ThemeContext.Provider>

@@ -3,6 +3,8 @@ $blue: #00AFFF;
 $orange: #FF8C63;
 $red: #FF5555;
 $white: #FFFFFF;
+$black: #303030;
+$yellow: #FFE630;
 $primary-font: 'Titillium Web';
 
 body {
@@ -37,7 +39,7 @@ body {
 %common-list-container{
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 600px;
   overflow-y: scroll;
   overflow-style: none;
   width: inherit;
@@ -84,6 +86,15 @@ body {
   }
 }
 
+%common-anchor{
+  text-decoration: underline;
+  font-size: 20px;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
 .LightTheme {
   &--container{
     @extend %common-container;
@@ -122,6 +133,57 @@ body {
     &:before{
       color: $red; 
     }
+  }
+
+  &--theme-anchor{
+    @extend %common-anchor;
+    color: $white;
+  }
+}
+
+.DarkTheme {
+  &--container{
+    @extend %common-container;
+    background-color: $black;
+  }
+
+  &--wrapper{
+    @extend %common-wrapper;
+  }
+
+  &--form-container{
+    @extend %common-form-container;
+    background-color: $white;
+  }
+
+  &--input{
+    @extend %common-input;
+  }
+
+  &--button{
+    @extend %common-button;
+    background-color: $red;
+  }
+
+  &--list-container{
+    @extend %common-list-container;
+    background-color: $white;
+  }
+
+  &--list-proper{
+    @extend %common-list-proper;
+  }
+
+  &--list-item{
+    @extend %common-list-item;
+    &:before{
+      color: $yellow; 
+    }
+  }
+
+  &--theme-anchor{
+    @extend %common-anchor;
+    color: $white;
   }
 }
 

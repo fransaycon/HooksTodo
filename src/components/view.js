@@ -3,7 +3,7 @@ import {ThemeContext} from "./theme-context";
 
 const View = props => {
 
-	const { items, text, addItem, updateText } = props;
+	const { items, text, addItem, updateText, changeTheme } = props;
 
 	return (
 		<ThemeContext.Consumer>
@@ -32,6 +32,7 @@ const View = props => {
 									}
 								</ul>
 							</div>
+							<label className={`${theme}--theme-anchor`} onClick={()=>changeTheme()}>Change Theme</label>
 						</div>
 					</div>
 				)
