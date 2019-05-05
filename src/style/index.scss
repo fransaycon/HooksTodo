@@ -3,7 +3,7 @@ $blue: #00AFFF;
 $orange: #FF8C63;
 $red: #FF5555;
 $white: #FFFFFF;
-$primary-font: 'Nanum Gothic';
+$primary-font: 'Titillium Web';
 
 body {
   font-family: $primary-font;
@@ -47,6 +47,7 @@ body {
   border-style: none;
   border: 0;
   color: $white;
+  font-family: inherit;
   font-size: 40px;
   height: inherit;
   opacity: 1;
@@ -54,6 +55,32 @@ body {
 
   &:hover{
     opacity: .9;
+  }
+}
+
+%common-input{
+  font-family: inherit;
+  font-size: 50px;
+  padding: 5px;
+  width: 100%;
+}
+
+%common-list-proper {
+  font-family: inherit;
+  font-size: 50px;
+  list-style: none;
+  margin: 25px 0 0 25px;
+}
+
+%common-list-item {
+
+  animation: fadein 0.9s;
+
+  &:before{
+    content: "\2022"; 
+    display: inline-block; 
+    margin-left: -1em; 
+    width: 1em;
   }
 }
 
@@ -72,19 +99,34 @@ body {
     background-color: $white;
   }
 
-  &--list-container{
-    @extend %common-list-container;
-    background-color: $white;
-  }
-
   &--input{
-    padding: 5px;
-    width: 100%;
-    font-size: 50px;
+    @extend %common-input;
   }
 
   &--button{
     @extend %common-button;
     background-color: $orange;
   }
+
+  &--list-container{
+    @extend %common-list-container;
+    background-color: $white;
+  }
+
+  &--list-proper{
+    @extend %common-list-proper;
+  }
+
+  &--list-item{
+    @extend %common-list-item;
+    &:before{
+      color: $red; 
+    }
+  }
 }
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+

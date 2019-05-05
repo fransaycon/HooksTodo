@@ -1,21 +1,36 @@
 import React from 'react';
 import {ThemeContext} from "./theme-context";
-import '../style/index.scss';
 
-const View = () => {
+const View = props => {
+
+	const { items, text, addItem, updateText } = props;
+
 	return (
 		<ThemeContext.Consumer>
 			{
 				theme => (
 					<div className={`${theme}--container`}>
 						<div className={`${theme}--wrapper`}>
-							<div className={`${theme}--form-container`} >
-								<input className={`${theme}--input`} placeholder="e.g. Water the plants" />
-								<button className={`${theme}--button`}>
-								ADD
-								</button>
-							</div>
+							<form className={`${theme}--form-container`} >
+								<input
+									className={`${theme}--input`}
+									placeholder="e.g. Water the plants"
+									value={text}
+									onChange={e=>updateText(e)}
+								/>
+								<input
+									type="submit"
+									className={`${theme}--button`}
+									onClick={e=>addItem(e)} 
+									value="ADD"
+								/>
+							</form>
 							<div className={`${theme}--list-container`} >
+								<ul	className={`${theme}--list-proper`}>
+									{
+										items.map(item => <li className={`${theme}--list-item`} >{item}</li>)
+									}
+								</ul>
 							</div>
 						</div>
 					</div>
