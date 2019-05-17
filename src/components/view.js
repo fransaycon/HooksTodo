@@ -4,20 +4,15 @@ import {useState, useEffect, useContext} from 'react';
 
 const View = props => {
 
-	const [text, setText] = useState("");
-	const [items, setItems] = useState([]);
-	const [count, setCount] = useState(0);
+	const item = useForm("");
+	const todo = useTodo([]);
 	const theme = useContext(ThemeContext);
-
-	useEffect(() => {
-		document.title = `You have ${count} tasks!`;
-	}, [count]);
+	useTitle(`You have ${todo.count} tasks!`);
 
 	function addItem(e){
 		e.preventDefault();
-		setItems([...items, text]);
-		setCount(count + 1);
-		setText("");
+		todo.add(item.value);
+		item.clear();
 	}
 
 	return (
@@ -27,20 +22,19 @@ const View = props => {
 					<input
 						className={`${theme}--input`}
 						placeholder="e.g. Water the plants"
-						value={text}
-						onChange={e=>setText(e.target.value)}
+						{...item}
 					/>
 					<input
 						type="submit"
 						className={`${theme}--button`}
-						onClick={e=>addItem(e)} 
+						onClick={addItem} 
 						value="ADD"
 					/>
 				</form>
 				<div className={`${theme}--list-container`} >
 					<ul	className={`${theme}--list-proper`}>
 						{
-							items.map(item => <li className={`${theme}--list-item`} >{item}</li>)
+							todo.list.map(item => <li className={`${theme}--list-item`} >{item}</li>)
 						}
 					</ul>
 				</div>
@@ -48,6 +42,47 @@ const View = props => {
 			</div>
 		</div>
 	);
+}
+
+function useForm(text){
+	const [value, setValue] = useState(text);
+
+	function handleFormChange(e){
+		setValue(e.target.value);
+	}
+
+	function handleClear(){
+		setValue("");
+	}
+
+	return {
+		value: value,
+		onChange: handleFormChange,
+		clear: handleClear,
+	}
+}
+
+function useTitle(title){
+	useEffect( () => {
+		document.title = title;
+	}, [title]);
+}
+
+function useTodo(list){
+
+	const [items, setItems] = useState(list);
+	const [count, setCount] = useState(list.length);
+
+	function addTodo(item){
+		setItems([...items, item]);
+		setCount(count + 1);
+	}
+
+	return {
+		count: count,
+		list: items,
+		add: addTodo,
+	}
 }
 
 export default View;
